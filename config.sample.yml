@@ -1,0 +1,3 @@
+awsProfile: default
+redisCluster: redis-sls-prod
+email: "devops@example.com"
