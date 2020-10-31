@@ -1,5 +1,5 @@
 {
-  "name": "redis-scaling",
+  "name": "aws-redis-scaling",
   "version": "0.1.0",
   "description": "Lambda fn vertically scaling aws elasticache cluster in schedule",
   "main": "handler.js",

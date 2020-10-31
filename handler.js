@@ -7,13 +7,15 @@ const elasticache = new AWS.ElastiCache({
 });
 
 const redisRepGID = process.env.REDIS_CLUSTER_REPGID
+const redisScaleupNodeType = process.env.REDIS_SCALEUP_NODE
+const redisScaledownNodeType = process.env.REDIS_SCALEDOWN_NODE
 
 // Redis Scale up fn
 module.exports.redisScaleup = async event => {
 
   const params = {
     ReplicationGroupId: redisRepGID,
-    CacheNodeType: 'cache.m5.large',
+    CacheNodeType: redisScaleupNodeType,
     ApplyImmediately: true,
   };
 
@@ -33,7 +35,7 @@ module.exports.redisScaledown = async event => {
 
   const params = {
     ReplicationGroupId: redisRepGID,
-    CacheNodeType: 'cache.t3.medium',
+    CacheNodeType: redisScaledownNodeType,
     ApplyImmediately: true,
   };
 
