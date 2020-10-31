@@ -1,0 +1,35 @@
+service: redis-scaling
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: prod
+  region: us-east-1
+  profile: default
+  memorySize: 256
+  timeout: 30
+
+  # service wide environment variable
+  environment:
+    REDIS_CLUSTER_REPGID: redis-prod
+
+  # IAM Role for Lambda
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - "elasticache:*"
+      Resource: "*"
+
+functions:
+  redis-scaleup:
+    handler: handler.redisScaleup
+    events:
+      # Invoke Lambda function Sat on 2AM
+      - schedule: cron(0 2 ? * SAT *)
+
+  redis-scaledown:
+    handler: handler.redisScaledown
+    events:
+      # Invoke Lambda function Sun on 11.30PM
+      - schedule: cron(0 22 ? * SUN *)
