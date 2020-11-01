@@ -25,7 +25,7 @@ module.exports.redisScaleup = async event => {
       return;
     })
     .catch((err) => {
-      console.log(err);
+      console.error(err);
       return err;
     });
 };
@@ -45,7 +45,7 @@ module.exports.redisScaledown = async event => {
       return;
     })
     .catch((err) => {
-      console.log(err);
+      console.error(err);
       return err;
     });
 };
